@@ -1,0 +1,8 @@
+{
+  "name": "ZenTasks",
+  "private": "true",
+  "devDependencies": {
+    "bourbon": "latest",
+    "neat": "latest"
+  }
+}

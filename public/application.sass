@@ -1,0 +1,110 @@
+// Import Bourbon & Neat
+@import "bower_components/bourbon/app/assets/stylesheets/_bourbon"
+@import "bower_components/neat/app/assets/stylesheets/_neat"
+
+// Colors
+$white: #FFF
+$elephant-grey: #2A3341
+$border-grey: #E6E6E6
+$background-grey: #F0F0F0
+
+// Font Vars
+$font-family-sans: 'Avenir', 'Helvetica', 'Arial', sans-serif
+$font-family-serif: 'Georgia', serif
+
+// Height Vars
+$height-input-task: 60px
+
+// Z Index
+$z-index-alpha: 9999
+
+html, 
+body
+	margin: 0
+	padding: 0
+	color: $elephant-grey 
+	background: $background-grey
+	font: 
+		family: $font-family-sans
+
+.overlay
+	@include transition(opacity $ease-out-cubic 300ms, visibility $ease-out-cubic 300ms)
+	@include position(fixed, 0 0 0 0)
+	z-index: $z-index-alpha - 1
+	opacity: 0
+	visibility: hidden
+	width: 100%
+	height: 100%
+	background: rgba($elephant-grey, 0.9)
+
+	&.show
+		@include transition(opacity $ease-out-cubic 300ms, visibility $ease-out-cubic 300ms)
+		opacity: 1
+		visibility: visible
+
+.task
+	@include position(absolute, $height-input-task null null null)
+	width: 100%
+	overflow-x: hidden
+	overflow-y: scroll
+
+	&__list
+		margin: 0
+		padding: 0
+		list-style-type: none
+
+	&__item
+		width: 100%
+		padding: 10px
+		overflow: hidden
+		background: $white
+		border-bottom: 1px solid $border-grey
+
+.create-task
+	@include position(fixed, 0 null null 0)
+	z-index: $z-index-alpha 
+	width: 100%
+	min-width: 540px
+	height: $height-input-task
+	border-bottom: 1px solid $border-grey
+
+.input-task
+	@include appearance(none)
+	height: 100%
+	white-space: normal
+	width: 100%
+	padding: 20px
+	border: 0
+
+	&:focus
+		outline: 0
+
+.btn-create-task
+	@include transition(all $ease-out-cubic 400ms)
+	@include position(fixed, 10px 10px null null)
+	@include appearance(none)
+	visibility: hidden
+	opacity: 0
+	border: 0
+	padding: 10px 16px
+	display: block
+	color: darken($white, 20%)
+	border-radius: 3px
+	background: darken($white, 4%)
+	font:
+		weight: 600
+
+	&.clickable
+		@include transition(all $ease-out-cubic 400ms)
+		visibility: visible
+		opacity: 1
+		color: $white
+		background: #1AA489
+
+.proverb-text
+	@include transform(translate(-50%, -50%))
+	@include position(absolute, 50% null null 50%)
+	text-align: center
+	font:
+		style: italic
+		family: $font-family-serif
