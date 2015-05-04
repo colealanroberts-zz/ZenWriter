@@ -4,15 +4,26 @@
 	<link rel="stylesheet" href="css/application.css">
 </head>
 <body>
-<div class="overlay js-focus-overlay"></div>
-<div class="create-task">
-	<input type="text" class="input-task js-input--task" placeholder="Enter a new task">
-	<button class="btn-create-task js-btn--create-task">Add Task</button>
-</div>
-<main class="task">
-	<p class="proverb-text js-proverb-text"></p>
-	<ul class="task__list js-task-list">
-	</ul>
+<aside class="sidebar">
+	<nav class="sidebar__nav">
+		<ul class="sidebar__nav__list">
+			<li class="sidebar__nav__item">
+				Active
+			</li>
+		</ul>
+	</nav>
+</aside>
+<main class="app-wrapper">
+	<div class="overlay js-focus-overlay"></div>
+	<div class="create-task">
+		<input type="text" class="input-title">
+		<textarea type="text" class="input-writing-canvas " placeholder="This is your canvas, may your mind run free."></textarea>
+		<button class="btn-create-task js-btn--create-task">Save Doc</button>
+	</div>
+	<div class="task">
+		<ul class="task__list js-task-list">
+		</ul>
+	</div>
 </main>
 <script type="text/javascript" charset="utf-8" src="js/application.js"></script>
 </body>
