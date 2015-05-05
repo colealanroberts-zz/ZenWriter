@@ -10,25 +10,16 @@ $background-grey: #F0F0F0
 
 // Font Vars
 $font-family-sans: 'Avenir', 'Helvetica', 'Arial', sans-serif
-$font-family-serif: 'Georgia', serif
+$font-family-serif: 'Baskerville', 'Georgia', serif
+
+// Font Sizes
+$font-size-20: em(20px)
 
 // Height Vars
 $height-input-task: 60px
 
 // Z Index
 $z-index-alpha: 9999
-
-::-webkit-scrollbar
-	width: 8px
-
-	&-track
-		border-radius: 4px
-		background: $white
-
-	&-thumb
-		border-radius: 10px
-		background: #E5E5E5
-		border: 2px solid $white
 
 html, 
 body
@@ -45,25 +36,127 @@ body
 	width: 100%
 	height: 100%
 
-.sidebar, .app-wrapper
-	position: absolute
-	display: block
+ul,
+ol
+	padding: 0
+	margin: 0
+
+.btn-focus-mode
+	position: relative
+	z-index: 9999
+	color: darken($white, 30%)
+	background: $white
+	border: 1px solid $border-grey
+	border-radius: 4px
+
+	&.active
+		color: #64B2FF
+		border: 1px solid #64B2FF
+
+.command-bar
+	@include position(0 null null 0)
+	height: 50px
+	padding: 10px
+	overflow: hidden
+	background: $white
+	width: 100%
+	border-bottom: 1px solid $border-grey
+
+	&.focus-mode
+		@include transition(all $ease-out-cubic 300ms)
+		height: 0
+		top: -50px
+
+.input-search-docs
+	padding: 4px
+	width: 240px
+	border: 1px solid $border-grey
+	border-radius: 999px
+	font:
+		family: $font-family-sans
+
+	&:focus
+		outline: 0
+
+.doc-viewer, 
+.editor
 	float: left
 
-.sidebar
+.doc-viewer
+	position: fixed
 	left: 0
-	width: 220px
 	height: 100%
-	background: $elephant-grey
+	width: 260px
+	overflow-y: scroll
+	background: #F2F2F2
+	border-right: 1px solid $border-grey
+	@include media(print)
+		display: none
 
-	&__nav
+	&__list
+		width: 100%
 
+	&__item
+		padding: 10px
+		overflow: hidden
+		border-bottom: 1px solid $border-grey
+		background: $white
+		font:
+			family: $font-family-serif
 
-.app-wrapper
-	left: 220px
-	width: calc(100% - 220px)
+.editor
+	position: absolute
+	z-index: 1000
 	height: 100%
-	overflow: auto
+	left: 260px
+	width: calc(100% - 260px)
+	background: $white
+	overflow-y: scroll
+	@include media(print)
+		display: block
+
+	&__textarea
+		@include position(absolute, 0 0 24px 0)
+		padding: 40px
+		margin: 0
+		border: 0
+		outline: 0
+		line-height: 30px
+		font-size: $font-size-20
+
+	&__count
+		@include position(absolute, null null 50px 0)
+		height: 24px
+		overflow: hidden
+		width: 100%
+		border-top: 1px solid $border-grey
+
+		&__item
+			color: darken($white, 30%)
+			padding: 0 10px
+			font-size: em(10px)
+			line-height: 24px
+			display: inline-block
+
+	&.focus-mode
+		@include transition(all $ease-out-cubic 300ms)
+		left: 0
+		width: 100%
+
+	p,
+	h1,
+	h2, 
+	h3,
+	h4, 
+	h5, 
+	h6,
+	input,
+	textarea,
+		font-family: $font-family-serif
+
+	p 
+		line-height: 1.6
+		font-size: $font-size-20
 
 .overlay
 	@include transition(opacity $ease-out-cubic 300ms, visibility $ease-out-cubic 300ms)

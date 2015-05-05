@@ -1,6 +1,6 @@
 (function() {
     // Set Window Name
-    MacGap.Window.title('ZenTasks');
+    MacGap.Window.title('ZenWriter');
 
     // Dev Env Var
     var DEV = true;
@@ -38,6 +38,7 @@
     var $inputTask     = document.querySelector('.js-input--task'),
         $btnCreateTask = document.querySelector('.js-btn--create-task'),
         $taskList      = document.querySelector('.js-task-list'),
+        $btnFocusMode  = document.querySelector('.js-btn--focus-mode'),
         $overlay       = document.querySelector('.js-focus-overlay');
 
     // Saved Tasks
@@ -91,17 +92,42 @@
         });
     }
 
+    var area = document.getElementById('editor-area');
+    var $countSentences  = document.getElementById('js-editor__count--sentences');
+    var $countWords      = document.getElementById('js-editor__count--words');
+    var $countParagraphs = document.getElementById('js-editor__count--paragraphs');
+
+    function countWords (counter) {
+        $countSentences.innerHTML = counter.sentences;
+        $countWords.innerHTML = counter.words;
+        $countParagraphs.innerHTML = counter.paragraphs;
+    }
+
+    Countable.live(area, countWords);
+
+    function enableFocusMode() {
+        var $editorWindow = document.querySelector('.editor');
+        var $commandBar   = document.querySelector('.command-bar');
+        var transitionStyle =  'all cubic-bezier(0.215, 0.61, 0.355, 1) 300ms';
+
+        var clicked = false;
+
+        if (!clicked) {
+            $editorWindow.style.transition = transitionStyle;
+            $commandBar.style.transition = transitionStyle;
+            clicked = true;
+
+            // Toggle this
+            $editorWindow.toggleClass('focus-mode');
+            $commandBar.toggleClass('focus-mode');
+            $btnFocusMode.toggleClass('active');
+        }
+    }
+
     function getExistingList() {
         var existingData = MacGap.File.read(resPath + '/ZenTasksList', 'json');
         JSON.stringify(existingData);
         var taskCount = Object.keys(existingData).length;
-
-        // Populate the list
-        for (var i in existingData) {
-            tasks.push(existingData[i].detail);
-            var taskItem = '<li class="task__item">' + existingData[i].detail + '</li>';
-            $taskList.innerHTML += taskItem;
-        }
         
         // Concat the Array
         tasks.push(existingData);
@@ -123,38 +149,6 @@
         }
     }
 
-    function validateInput() {
+    $btnFocusMode.addEventListener('click', enableFocusMode);
 
-        // Show the focus overlay
-        // $overlay.addClass('show');
-
-        $inputTask.addEventListener('keydown', function(e) {
-
-            var key = e.which || e.keyCode;
-            if ($inputTask.value.length > 1) {
-                $btnCreateTask.addClass('clickable');
-                $btnCreateTask.addEventListener('click', createTask);
-
-                if (key === 13) {
-                    createTask();
-                }
-
-            } else {
-                $btnCreateTask.removeClass('clickable');
-            }
-        });
-    }
-
-    // Test notification
-    notify('ZenTasks', 'App is running!');
-
-    // Load in lists
-    getAllLists();
-
-    // Validate our form
-    $inputTask.addEventListener('focus', validateInput);
-
-    $inputTask.addEventListener('blur', function() {
-        $overlay.removeClass('show');
-    });
 })();

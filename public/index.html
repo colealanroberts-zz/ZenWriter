@@ -3,28 +3,31 @@
 <head>
 	<link rel="stylesheet" href="css/application.css">
 </head>
-<body>
-<aside class="sidebar">
-	<nav class="sidebar__nav">
-		<ul class="sidebar__nav__list">
-			<li class="sidebar__nav__item">
-				Active
-			</li>
-		</ul>
-	</nav>
-</aside>
-<main class="app-wrapper">
-	<div class="overlay js-focus-overlay"></div>
-	<div class="create-task">
-		<input type="text" class="input-title">
-		<textarea type="text" class="input-writing-canvas " placeholder="This is your canvas, may your mind run free."></textarea>
-		<button class="btn-create-task js-btn--create-task">Save Doc</button>
-	</div>
-	<div class="task">
-		<ul class="task__list js-task-list">
-		</ul>
-	</div>
+<body ng-app="zen">
+<div class="command-bar">
+	<input type="text" ng-model="query" class="input-search-docs">
+</div>
+<div class="doc-viewer" ng-controller="homeCtrl">
+	<ul class="doc-viewer__list">
+		<li class="doc-viewer__item" ng-repeat="doc in docs | filter:query | orderBy: name" ng-click="loadDoc(doc)">{{ doc.name }}</li>
+	</ul>
+</div>
+<main class="editor" ng-controller="editorCtrl">
+	<textarea class="editor__textarea" id="editor-area">{{ doc.content }}</textarea>
+	<div class="editor__count">
+		<span class="editor__count__item editor__count__item--words">Words: <span id="js-editor__count--words"></span></span>
+		<span class="editor__count__item editor__count__item--paragraphs">Paragraphs: <span id="js-editor__count--paragraphs"></span></span>
+		<span class="editor__count__item editor__count__item--sentences">Sentences: <span id="js-editor__count--sentences"></span></span>
+		<button class="btn-focus-mode js-btn--focus-mode">Focus Mode</button>
+	</div>	
 </main>
+<script type="text/javascript" charset="utf-8" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" charset="utf-8" src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="bower_components/ui-router/release/angular-ui-router.js"></script>
+<script type="text/javascript" charset="utf-8" src="bower_components/Countable/Countable.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/zen.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/routing.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/controllers.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/application.js"></script>
 </body>
 </html>

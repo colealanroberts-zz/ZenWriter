@@ -1,0 +1,1 @@
+var zen=angular.module("zen",["ui.router","ngAnimate"]);zen.config(function(e,t,l){var r="../public/templates/";l.otherwise("/"),t.state("home",{url:"/",templateUrl:r+"home.html",controller:"homeCtrl"})});

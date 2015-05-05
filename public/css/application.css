@@ -4,16 +4,6 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
-::-webkit-scrollbar {
-  width: 8px; }
-  ::-webkit-scrollbar-track {
-    border-radius: 4px;
-    background: #FFF; }
-  ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #E5E5E5;
-    border: 2px solid #FFF; }
-
 html,
 body {
   margin: 0;
@@ -28,22 +18,128 @@ body {
   width: 100%;
   height: 100%; }
 
-.sidebar, .app-wrapper {
-  position: absolute;
-  display: block;
+ul,
+ol {
+  padding: 0;
+  margin: 0; }
+
+.btn-focus-mode {
+  position: relative;
+  z-index: 9999;
+  color: #b3b3b3;
+  background: #FFF;
+  border: 1px solid #E6E6E6;
+  border-radius: 4px; }
+  .btn-focus-mode.active {
+    color: #64B2FF;
+    border: 1px solid #64B2FF; }
+
+.command-bar {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 50px;
+  padding: 10px;
+  overflow: hidden;
+  background: #FFF;
+  width: 100%;
+  border-bottom: 1px solid #E6E6E6; }
+  .command-bar.focus-mode {
+    -webkit-transition: all cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+    -moz-transition: all cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+    transition: all cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+    height: 0;
+    top: -50px; }
+
+.input-search-docs {
+  padding: 4px;
+  width: 240px;
+  border: 1px solid #E6E6E6;
+  border-radius: 999px;
+  font-family: "Avenir", "Helvetica", "Arial", sans-serif; }
+  .input-search-docs:focus {
+    outline: 0; }
+
+.doc-viewer,
+.editor {
   float: left; }
 
-.sidebar {
+.doc-viewer {
+  position: fixed;
   left: 0;
-  width: 220px;
   height: 100%;
-  background: #2A3341; }
+  width: 260px;
+  overflow-y: scroll;
+  background: #F2F2F2;
+  border-right: 1px solid #E6E6E6; }
+  @media screen and (min-width: print) {
+    .doc-viewer {
+      display: none; } }
+  .doc-viewer__list {
+    width: 100%; }
+  .doc-viewer__item {
+    padding: 10px;
+    overflow: hidden;
+    border-bottom: 1px solid #E6E6E6;
+    background: #FFF;
+    font-family: "Baskerville", "Georgia", serif; }
 
-.app-wrapper {
-  left: 220px;
-  width: calc(100% - 220px);
+.editor {
+  position: absolute;
+  z-index: 1000;
   height: 100%;
-  overflow: auto; }
+  left: 260px;
+  width: calc(100% - 260px);
+  background: #FFF;
+  overflow-y: scroll; }
+  @media screen and (min-width: print) {
+    .editor {
+      display: block; } }
+  .editor__textarea {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 24px;
+    left: 0;
+    padding: 40px;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    line-height: 30px;
+    font-size: 1.25em; }
+  .editor__count {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    height: 24px;
+    overflow: hidden;
+    width: 100%;
+    border-top: 1px solid #E6E6E6; }
+    .editor__count__item {
+      color: #b3b3b3;
+      padding: 0 10px;
+      font-size: 0.625em;
+      line-height: 24px;
+      display: inline-block; }
+  .editor.focus-mode {
+    -webkit-transition: all cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+    -moz-transition: all cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+    transition: all cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+    left: 0;
+    width: 100%; }
+  .editor p,
+  .editor h1,
+  .editor h2,
+  .editor h3,
+  .editor h4,
+  .editor h5,
+  .editor h6,
+  .editor input,
+  .editor textarea {
+    font-family: "Baskerville", "Georgia", serif; }
+  .editor p {
+    line-height: 1.6;
+    font-size: 1.25em; }
 
 .overlay {
   -webkit-transition: opacity cubic-bezier(0.215, 0.61, 0.355, 1) 300ms, visibility cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
@@ -142,3 +238,5 @@ body {
     opacity: 1;
     color: #FFF;
     background: #1AA489; }
+
+/*# sourceMappingURL=application.css.map */

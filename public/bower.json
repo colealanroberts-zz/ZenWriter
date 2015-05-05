@@ -1,8 +1,12 @@
 {
-  "name": "ZenTasks",
+  "name": "ZenWriter",
   "private": "true",
   "devDependencies": {
+  	"angular": "latest",
+  	"ui-router": "latest",
+  	"angular-animate": "latest",
     "bourbon": "latest",
-    "neat": "latest"
+    "neat": "latest",
+    "Countable": "latest"
   }
 }
